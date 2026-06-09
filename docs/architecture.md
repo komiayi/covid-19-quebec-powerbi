@@ -24,14 +24,14 @@ from INSPQ          ───►     stacked into uniform      ───►    +
 Each wave file is loaded into its own raw query (`PL_v1_brut`, `PL_v2_brut`,
 ..., `PL_end_brut`), with two key decisions :
 
-1. **No header promotion** : Power Query's `Table.PromoteHeaders` is
+1. No header promotion : Power Query's `Table.PromoteHeaders` is
    deliberately NOT used, because the source files contain duplicate column
    names (`% F CUMUL` appears 5 times). Promoting would create ambiguous
    `.1`, `.2` suffixes that depend on Power Query's deduplication algorithm.
    Instead, columns stay as `Column1`, `Column2`, ..., which are positional
    and stable.
 
-2. **First row dropped** : the header row is removed via `Table.Skip(Source, 1)`,
+2. First row dropped : the header row is removed via `Table.Skip(Source, 1)`,
    so we work directly with data rows.
 
 ### Layer 2 — Restructuring (2 reusable functions)
@@ -108,13 +108,13 @@ Resulting in approximately **1 500 rows** with the following schema :
 The choice of a star schema (rather than a snowflake or flat table) is
 deliberate :
 
-- **Performance** : star schemas are optimized for analytical queries,
+- Performance : star schemas are optimized for analytical queries,
   with small dimension tables joined to a large fact table
-- **Clarity** : the model is immediately understandable by anyone familiar
+- Clarity : the model is immediately understandable by anyone familiar
   with BI patterns
-- **Filterability** : Power BI's filter propagation works seamlessly across
+- Filterability : Power BI's filter propagation works seamlessly across
   dimensions, enabling intuitive slicing
-- **Industry standard** : recruiters and BI professionals expect this pattern
+- Industry standard : recruiters and BI professionals expect this pattern
 
 ### The four dimensions
 
@@ -196,10 +196,10 @@ The source files include pre-computed totals (`Cas total CUMUL`,
 `Taux pour 100 000 CUMUL`) for each indicator. These were intentionally
 excluded because :
 
-1. **Risk of double-counting** : keeping them as rows would inflate sums
-2. **Best practice** : totals should be recomputed by DAX, which guarantees
+1. Risk of double-counting : keeping them as rows would inflate sums
+2. Best practice : totals should be recomputed by DAX, which guarantees
    consistency with the current filter context
-3. **Cleaner model** : the fact table contains only atomic measures
+3. Cleaner model : the fact table contains only atomic measures
 
 ### Why an explicit list of valid age groups instead of `Table.RemoveLastN` ?
 
@@ -207,10 +207,10 @@ An earlier version used `Table.RemoveLastN(table, 3)` to drop trailing
 rows (totals, notes, blanks). This was replaced by an explicit filter on
 a whitelist of valid age group labels, because :
 
-- **Robustness** : works regardless of how many trailing rows a file has
-- **Self-documenting** : the code immediately shows which categories are
+- Robustness : works regardless of how many trailing rows a file has
+- Self-documenting : the code immediately shows which categories are
   considered valid
-- **Bug-resistant** : if a future file has different trailing content,
+- Bug-resistant : if a future file has different trailing content,
   the filter still works correctly
 
 ---
@@ -219,15 +219,15 @@ a whitelist of valid age group labels, because :
 
 ### What is NOT in v1.0
 
-- **2023-2024 and 2024-2025 seasons** : these later files use a different
+- 2023-2024 and 2024-2025 seasons : these later files use a different
   column structure that does not match the V1-V7 + END pattern. Including
   them requires writing an adapted function — planned for v1.1.
 
-- **Regional breakdown** : the current model is province-wide. INSPQ also
+- Regional breakdown : the current model is province-wide. INSPQ also
   publishes data by health region, which could be integrated with an
   additional `DIM_REGION` dimension.
 
-- **Daily granularity** : the source files are cumulative snapshots, not
+- Daily granularity : the source files are cumulative snapshots, not
   time series. For day-by-day evolution, a different set of INSPQ files
   would need to be integrated.
 
