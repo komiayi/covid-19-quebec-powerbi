@@ -1,4 +1,4 @@
-# COVID-19 Quebec Dashboard — Wave-by-Wave Analysis
+# COVID-19 Quebec Dashboard : Wave-by-Wave analysis
 
 [![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?style=flat&logo=powerbi&logoColor=black)](https://powerbi.microsoft.com/)
 [![Power Query](https://img.shields.io/badge/Power%20Query-M-blue)](https://learn.microsoft.com/en-us/powerquery-m/)
@@ -12,34 +12,34 @@ across the first 7 waves and the transitional endemic period
 
 ---
 
-## 🎯 Project Objective
+## Project Objective
 
 Compare six key health indicators (confirmed cases, deaths, three types of
-hospitalizations, recoveries) by **age group**, **sex** and **pandemic period**,
+hospitalizations, recoveries) by age group, sex and pandemic period,
 to identify the most vulnerable populations and track epidemiological trends
 over time.
 
 ---
 
-## 📊 Data Source
+## Data Source
 
-All data comes from the **INSPQ COVID-19 open data archives** :
+All data comes from the INSPQ COVID-19 open data archives :
 
-- **Reference page** : [inspq.qc.ca/covid-19/donnees/archives](https://www.inspq.qc.ca/covid-19/donnees/archives)
-- **Files used** : 8 CSV files (`PL_AGE_SEXE_v1.csv` through `v7.csv` + `PL_AGE_SEXE_end.csv`)
-- **Period covered** : February 23, 2020 → September 3, 2023
-- **Granularity** : cumulative counts by age group and sex per wave
-- **Format** : comma-delimited CSV, UTF-8 encoding
+- Reference page : [inspq.qc.ca/covid-19/donnees/archives](https://www.inspq.qc.ca/covid-19/donnees/archives)
+- Files used : 8 CSV files (`PL_AGE_SEXE_v1.csv` through `v7.csv` + `PL_AGE_SEXE_end.csv`)
+- Period covered : February 23, 2020 → September 3, 2023
+- Granularity : cumulative counts by age group and sex per wave
+- Format : comma-delimited CSV, UTF-8 encoding
 
 See [`data/sources.md`](data/sources.md) for the complete list of source URLs.
 
 ---
 
-## 🏗️ Technical Architecture
+## Technical Architecture
 
 ### Star schema model
 
-The data model follows the **star schema pattern** with one fact table at
+The data model follows the star schema pattern with one fact table at
 the center and four dimension tables around it :
 
 ```
@@ -67,11 +67,11 @@ documentation and design decisions.
 
 The INSPQ source files present a deliberately tricky structure :
 
-- **Duplicate column names** : `% F CUMUL`, `Sexe inconnu CUMUL` and others
+- Duplicate column names : `% F CUMUL`, `Sexe inconnu CUMUL` and others
   appear up to 5 times in the same file
-- **Encoded attributes in headers** : sex is embedded in column names
+- Encoded attributes in headers : sex is embedded in column names
   (`Cas F CUMUL`, `Cas H CUMUL`) instead of being a proper variable
-- **Position-dependent semantics** : the indicator (cases, deaths,
+- Position-dependent semantics : the indicator (cases, deaths,
   hospitalizations) can only be inferred from column position, not from name
 
 ### Solution : reusable parameterized M functions
@@ -92,20 +92,20 @@ See [`powerquery/`](powerquery/) for the complete function code.
 
 ---
 
-## 🛠️ Technologies & Skills Demonstrated
+## Technologies & Skills Demonstrated
 
 | Skill area | Specifics |
 |---|---|
-| **Power BI Desktop** | Report design, modeling, DAX measures |
-| **Power Query (M)** | Reusable parameterized functions, dynamic column references, conditional logic |
-| **Data modeling** | Star schema design, dimension tables with sort orders, long-format normalization |
-| **Data cleaning** | Position-based extraction, duplicate header handling, type conversion, explicit row filtering |
-| **DAX** | Calculated measures, time intelligence, contextual aggregations |
-| **Documentation** | Reproducible code, traceable transformations, README-driven design |
+| Power BI Desktop | Report design, modeling, DAX measures |
+| Power Query (M) | Reusable parameterized functions, dynamic column references, conditional logic |
+| Data modeling | Star schema design, dimension tables with sort orders, long-format normalization |
+| Data cleaning | Position-based extraction, duplicate header handling, type conversion, explicit row filtering |
+| DAX | Calculated measures, time intelligence, contextual aggregations |
+| Documentation | Reproducible code, traceable transformations, README-driven design |
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 covid-19-quebec-powerbi/
@@ -134,12 +134,12 @@ covid-19-quebec-powerbi/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
-- **Power BI Desktop** (free version) — [Download here](https://powerbi.microsoft.com/desktop/)
-- Or **Power BI Service** account to view a published version (link coming in v1.1)
+- Power BI Desktop (free version) — [Download here](https://powerbi.microsoft.com/desktop/)
+- Or Power BI Service account to view a published version (link coming in v1.1)
 
 ### Open the project
 
@@ -159,32 +159,32 @@ To explore the M code directly :
 
 ---
 
-## 🎨 Dashboard Highlights
+## Dashboard Highlights
 
 *[Screenshots will be added once the visualization layer is complete]*
 
 The dashboard will include :
-- **Overview tab** : key KPIs and pandemic timeline
-- **Demographic analysis** : age and sex breakdowns per indicator
-- **Wave comparison** : evolution from V1 through endemic transition
-- **Hospitalization deep-dive** : ICU vs non-ICU patterns
+- Overview tab : key KPIs and pandemic timeline
+- Demographic analysis : age and sex breakdowns per indicator
+- Wave comparison : evolution from V1 through endemic transition
+- Hospitalization deep-dive : ICU vs non-ICU patterns
 
 ---
 
-## 🔭 Roadmap (v1.1 and beyond)
+##  Roadmap (v1.1 and beyond)
 
-- [ ] **Visualization layer** : 3-4 thematic tabs with interactive filters
-- [ ] **Publication** : deployment to Power BI Service with public sharing link
-- [ ] **Extended periods** : integration of 2023-2024 and 2024-2025 seasons
+- [ ] Visualization layer : 3-4 thematic tabs with interactive filters
+- [ ] Publication : deployment to Power BI Service with public sharing link
+- [ ] Extended periods : integration of 2023-2024 and 2024-2025 seasons
       (which use a different file structure requiring an adapted function)
-- [ ] **Regional analysis** : breakdown by health region using additional
+- [ ] Regional analysis : breakdown by health region using additional
       INSPQ files
-- [ ] **Wastewater correlation** : cross-reference with the SARS-CoV-2
+- [ ] Wastewater correlation : cross-reference with the SARS-CoV-2
       wastewater surveillance data
 
 ---
 
-## 📚 Background & Motivation
+## Background & Motivation
 
 This project is part of a broader portfolio demonstrating my ability to
 handle real-world public health data in their raw, imperfect state.
@@ -193,14 +193,14 @@ It complements my academic background in biostatistics and epidemiology
 skills that go alongside statistical modeling.
 
 The choice of COVID-19 INSPQ data is deliberate :
-- **Real public health data** at population scale
-- **Genuinely messy source structure** that requires thoughtful cleanup
-- **Multi-period coverage** allowing meaningful longitudinal analysis
-- **Open and reproducible** — anyone can rebuild this dashboard from the URLs
+- Real public health data at population scale
+- Genuinely messy source structure that requires thoughtful cleanup
+- Multi-period coverage allowing meaningful longitudinal analysis
+- Open and reproducible — anyone can rebuild this dashboard from the URLs
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License — see the [LICENSE](LICENSE)
 file for details.
@@ -222,7 +222,7 @@ or endorsed by the INSPQ.
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **INSPQ** (Institut national de santé publique du Québec) for making
   these data openly available
