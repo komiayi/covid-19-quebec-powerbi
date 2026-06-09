@@ -1,7 +1,7 @@
 # Data Sources
 
-This project uses open data published by the **Institut national de santé
-publique du Québec (INSPQ)**, freely available from their COVID-19 data
+This project uses open data published by the Institut national de santé
+publique du Québec (INSPQ), freely available from their COVID-19 data
 archives page.
 
 ---
@@ -40,7 +40,7 @@ rather than calendar boundaries.
 ## Files NOT included in v1.0
 
 The following files exist on the INSPQ portal but are not included in this
-version because they use a **different column structure** that does not match
+version because they use a different column structure that does not match
 the V1-V7 / END pattern :
 
 | File | Reason for exclusion |
@@ -79,12 +79,12 @@ For technical details on how this structure is handled, see
 
 ## Data file format
 
-- **Encoding** : UTF-8 (code page 65001)
-- **Delimiter** : comma (`,`)
-- **Decimal separator** : period (`.`)
-- **Headers** : first row contains column labels, but **deliberately ignored**
+- Encoding : UTF-8 (code page 65001)
+- Delimiter : comma (`,`)
+- Decimal separator : period (`.`)
+- Headers : first row contains column labels, but deliberately ignored
   by the M code due to ambiguity (see architecture document)
-- **Total / summary rows** : present at the end of each file, filtered out
+- Total / summary rows : present at the end of each file, filtered out
   by an explicit whitelist of valid age groups
 
 ---
