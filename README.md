@@ -1,4 +1,4 @@
-# COVID-19 Quebec Dashboard : Wave-by-Wave analysis
+# COVID-19 Quebec dashboard : wave-by-wave analysis
 
 [![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?style=flat&logo=powerbi&logoColor=black)](https://powerbi.microsoft.com/)
 [![Power Query](https://img.shields.io/badge/Power%20Query-M-blue)](https://learn.microsoft.com/en-us/powerquery-m/)
