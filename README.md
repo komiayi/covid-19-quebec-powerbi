@@ -211,7 +211,7 @@ or endorsed by the INSPQ.
 
 ---
 
-## 👤 Author
+## Author
 
 **Komi Ayi** — Data Scientist | Biostatistics & Health Analytics
 
